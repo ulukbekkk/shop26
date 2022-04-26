@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Category(models.Model):
     #http://localhost:8000/category/computers/
@@ -13,6 +14,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        # http://test/object111/
+        return reverse('shop:product_list_by_category',
+                       args=[self.slug, ])
+
 
 
 class Product(models.Model):
@@ -36,4 +43,7 @@ class Product(models.Model):
         return self.name
 
 
-
+    def get_absolute_url(self):
+        # http://test/object111/
+        return reverse('shop:product_details',
+                       args=[self.slug, ])
